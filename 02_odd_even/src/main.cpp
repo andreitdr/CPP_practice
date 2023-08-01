@@ -39,15 +39,21 @@ int main(int argc, char *argv[])
 	// TODO(Gusti): i don't know why this doesn't work, but someone please FIX it.
 	// --------------- start
 
-	// Get the first argument
-	std::string argumentAsString = argv[1];
-	const char* argumentAsCharArray = argumentAsString.c_str();
+    if(argc <= 1) return 0;
 
-	//number = argv[1]; // No
-	//should use atoi?
-	// or std::stoi?
+    std::string argumentAsString = argv[1];
 
-	std::cout << argumentAsString << std::endl; // i think this should be removed
+    int strLength = argumentAsString.length();
+    for(int i= 0; i< strLength; i++)
+    {
+        if(!std::isdigit(argumentAsString[i]))
+        {
+            std::cout << "Invalid number.";
+            return -1;
+        }
+    }
+
+    number = std::atoi(argumentAsString.c_str());
 
 	// --------------- stop
 
