@@ -13,24 +13,35 @@ private:
 
 	// TODO: store the data
 	// hints: you can use std::string, std::vectors + string, char**, vector<vector<char>>, etc
+	std::vector<std::string> matrixContent;
+
 public:
-	Matrix(size_t numColumnsX, size_t numLinesY)
-		// TODO: add functionality
-	{
-		// TODO: add functionality
+	Matrix(size_t numColumnsX, size_t numLinesY) : column_count(numColumnsX), line_count(numLinesY){
+		matrixContent.resize(line_count);
+		for (size_t i = 0; i < line_count; i++)
+		{
+			matrixContent[i].resize(column_count);
+		}
 	}
+
 
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
+		if (line_number < line_count)
+		{
+			matrixContent[line_number] = data;
+		}
 	}
 
 	//OPTIONAL
-	//char getCellXY(size_t x, size_t y, char cell_content)
-	//{
-	//	// TODO: add functionality
-	//	return 0;
-	//}
+	char getCellXY(size_t x, size_t y)
+	{
+		if (x < column_count && y < line_count)
+			return matrixContent[y][x];
+
+		return NULL;
+	}
 
 	/**
 		Sets the cell content for a specific cell identified by its coordinates (X and Y)
@@ -54,13 +65,16 @@ public:
 	*/
 	void setCellXY(size_t x, size_t y, char cell_content)
 	{
-		// TODO: add functionality
+		if (x < column_count && y < line_count)
+			matrixContent[y][x] = cell_content;
 	}
 
 	void print()
 	{
-		// print all lines and columns
-		// TODO: add functionality
+		for (size_t y = 0; y < line_count; y++)
+		{
+			std::cout << matrixContent[y] << std::endl;
+		}
 	}
 };
 
@@ -94,6 +108,7 @@ X-----X----X-----XX-
 ------------------X-
 -----------------X--
 */
+	std::cout << std::endl;
 	matrix.setCellXY(2, 1, '-');
 	matrix.print();
 	// Would print
@@ -109,6 +124,8 @@ X-----X----X-----XX-
 ------------------X-
 -----------------X--
 */
+
+	std::cout << std::endl;
 
 	matrix.setCellXY(3, 7, 'O');
 	matrix.print();
